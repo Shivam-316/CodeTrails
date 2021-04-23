@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/leaderboard.css' %}">
+{% endblock style %}
+{% block content %}
+<div class="jumbotron bg-transparent mb-0 pt-3 radius-0">
+    <div class="container">
+        <div class="row mt-5  justify-content-center">
+            <div class="col-xl-10 tableContainer">
+                <table class="table table-hover table-striped">
+                    <thead class="thead-dark" >
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody id='table'>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block script %}
+{% autoescape off %}
+{{ profiles|json_script:"board-data" }}
+    <script src="{% static 'js/leaderboard.js' %}"></script>
+{% endautoescape %}
+{% endblock script %}

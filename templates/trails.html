@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% block style %}
+  <link rel="stylesheet" href="{% static 'css/trails.css' %}">
+{% endblock style %}
+{% block content %}
+<div class="question-block hidden">
+    <div class="question">
+        <h2>Question</h2>
+        <div class="text">
+            {{ question }}
+        </div>
+    </div>
+    <div class="assets">
+        <h2>Asset</h2>
+        {% if asset == None %}
+            <div class="text-primary">
+                This Question Has No Assets.
+            </div>
+        {% else %}
+            <div>
+                <a target="_blank" href="{{ asset }}">Link To This Question's Asset</a>
+            </div>
+        {% endif %}
+    </div>
+    <div class="answer">
+        <div class="response">
+
+        </div>
+        <div class="input-group mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Answer: </span>
+            </div>
+            <input id="temp-ans" type="text" class="form-control" placeholder="Enter Your Answer Here..." aria-label="Enter Your Answer Here..." aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-primary check" type="button" id="button-addon2">Check</button>
+            </div>
+        </div>
+        
+        <form id='answer-form' action="{% url 'checkAnswer' %}" method="POST" style="display: none;">{% csrf_token %}
+            {{ ans_input }}
+            <input type="submit" value="Check">
+        </form>
+    </div>    
+</div>
+<div class="trail hidden text-center">
+    <h1>Choose Your Trail</h1>
+    <button class="btn btn-outline-primary mr-4" value="A" data-url="{% url 'chooseTrail' %}">Trail A</button>
+    <button class="btn btn-outline-primary mr-4" value="B" data-url="{% url 'chooseTrail' %}">Trail B</button>
+    <button class="btn btn-outline-primary" value="C" data-url="{% url 'chooseTrail' %}">Trail C</button>
+</div>
+{% endblock content %}
+{% block script %}
+    {% autoescape off %}
+        {{ choosing|json_script:"choosing" }}
+    {% endautoescape %}
+  <script src="{% static 'js/Trails.js' %}"></script>
+{% endblock script %}

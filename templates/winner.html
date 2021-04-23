@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="jumbotron text-center bg-secondary">
+        <h1 class="mb-5 text-dark">CONGRATS! <span class="text-white">{{ request.user| upper }}</span></h1>
+        <h5> You Have Succesfully Completed <span class="text-dark">ACM CodeTrails</span>.<h5>
+    </div>
+{% endblock content %}

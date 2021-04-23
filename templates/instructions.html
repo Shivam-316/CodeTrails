@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block style %}
+  <link rel="stylesheet" href="{% static 'css/instructions.css' %}">
+{% endblock style %}
+{% block content %}
+  <h1 class="text-center mb-5">Instructions</h1>
+  <div class="list_div">
+    <ul class="list">
+      <li>Register yourself on the CodeTrails website to access the questions. </li>
+
+      <li>There are 10 questions that have to be solved in 2 hours to reach the finish line.</li>
+
+      <li>There will be 3 paths to the finish line: Path A, Path B, Path C. Each path is a set of 10 questions and at each step, a question will be encountered. </li>
+
+      <li>You will be asked to choose any one of the three paths. On choosing a path, a question will appear. It can either be a coding question or a trivia question .</li>
+
+      <li>The answer has to be entered in the space provided. If the answer is correct, you’ll be asked to choose if you want to remain on the same path or change.</li>
+
+      <li>Answers are not case sensitive</li>
+
+      <li>Ranks can be viewed on the leaderboard.</li>
+
+      <li>Remember, once the timer starts, it can't be paused. </li>
+    </ul>
+    {% if not user.is_authenticated %}
+      <a href="{% url 'login' %}"><button class="login_button">Login</button></a>
+    {% else %}
+      <a href="{% url 'nextques' %}"><button class="login_button">Trails</button></a>
+    {% endif %}
+  </div>
+{% endblock content %}
